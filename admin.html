@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172554">
+  <title>จัดการเว็บไซต์ | ถามตอบ</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script defer src="admin.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">Q</div>
+    <div class="brand-wrap">
+      <div class="brand">จัดการเว็บไซต์ถามตอบ</div>
+      <div class="tagline">พื้นที่สำหรับเจ้าของเว็บไซต์เท่านั้น</div>
+    </div>
+    <a class="admin-home" href="index.html">ดูหน้าเว็บ</a>
+  </header>
+  <main class="container admin-container">
+    <section class="intro admin-intro">
+      <span class="eyebrow">ADMIN AREA</span>
+      <h1>จัดการ<span>คำถาม</span></h1>
+      <p>เข้าสู่ระบบเพื่อเพิ่ม แก้ไข ซ่อน หรือ ลบคำถาม</p>
+    </section>
+    <div id="admin-status" class="status" role="status">กำลังตรวจสอบการตั้งค่า...</div>
+
+    <section id="login-panel" class="question-card admin-panel" hidden>
+      <h2>เข้าสู่ระบบแอดมิน</h2>
+      <p class="panel-hint">ใช้บัญชีที่สร้างไว้ใน Supabase Authentication เท่านั้น</p>
+      <form id="login-form" class="answer-form">
+        <label for="email">อีเมลแอดมิน</label>
+        <input id="email" name="email" type="email" required autocomplete="username" placeholder="อีเมลที่ได้รับอนุญาต">
+        <label for="password">รหัสผ่าน</label>
+        <input id="password" name="password" type="password" required autocomplete="current-password" placeholder="รหัสผ่าน">
+        <button class="submit-button" type="submit">เข้าสู่ระบบ</button>
+        <p id="login-message" class="form-message" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="dashboard" hidden>
+      <div class="admin-toolbar">
+        <div>
+          <strong id="admin-email"></strong>
+          <p class="panel-hint">เฉพาะบัญชีที่กำหนดสิทธิ์แอดมินเท่านั้นจึงแก้ไขข้อมูลได้</p>
+        </div>
+        <button id="logout" class="secondary-button" type="button">ออกจากระบบ</button>
+      </div>
+      <section class="question-card admin-panel">
+        <h2 id="editor-title">เพิ่มคำถามใหม่</h2>
+        <form id="question-form" class="answer-form">
+          <input type="hidden" name="id">
+          <label for="question-title">คำถาม *</label>
+          <input id="question-title" name="title" maxlength="300" required placeholder="พิมพ์คำถามที่ต้องการถาม">
+          <label for="question-description">คำอธิบายเพิ่มเติม (ไม่บังคับ)</label>
+          <textarea id="question-description" name="description" maxlength="1500" rows="3" placeholder="บอกผู้ตอบว่าต้องการคำตอบแบบไหน"></textarea>
+          <label class="check-row"><input type="checkbox" name="is_published" checked> เผยแพร่ให้ทุกคนเห็น</label>
+          <div class="button-row">
+            <button id="save-question" class="submit-button" type="submit">บันทึกคำถาม</button>
+            <button id="cancel-edit" class="secondary-button" type="button" hidden>ยกเลิกแก้ไข</button>
+          </div>
+          <p id="question-message" class="form-message" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="question-card admin-panel">
+        <div class="admin-list-heading">
+          <h2>คำถามทั้งหมด</h2>
+          <button id="reload-questions" class="text-button" type="button">↻ โหลดใหม่</button>
+        </div>
+        <div id="admin-questions" class="admin-question-list"></div>
+      </section>
+    </section>
+    <footer>
+      <p>อย่าแชร์รหัสผ่านแอดมินหรือ Secret key ให้ผู้อื่น</p>
+    </footer>
+  </main>
+</body>
+</html>

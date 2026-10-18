@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <title>ถามตอบ | แบ่งปันความคิดเห็น</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">Q</div>
+    <div>
+      <div class="brand">ถามตอบ</div>
+      <div class="tagline">พื้นที่แบ่งปันความคิดเห็นของทุกคน</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <span class="eyebrow">COMMUNITY Q&A</span>
+      <h1>คำถามจากคุณ<br><span>คำตอบจากทุกคน</span></h1>
+      <p>เลือกคำถาม ส่งคำตอบ แล้วมาอ่านมุมมองของคนอื่นได้ที่นี่</p>
+    </section>
+
+    <div id="status" class="status" role="status">กำลังโหลดคำถาม...</div>
+    <section id="questions" class="questions" aria-live="polite"></section>
+
+    <footer>
+      <p>โปรดตอบอย่างสุภาพ และอย่าใส่ข้อมูลส่วนตัว เช่น เบอร์โทรศัพท์หรือที่อยู่</p>
+      <button id="refresh" class="text-button" type="button">↻ โหลดข้อมูลใหม่</button>
+    </footer>
+  </main>
+
+  <template id="question-template">
+    <article class="question-card">
+      <div class="question-top">
+        <span class="question-number"></span>
+        <span class="answer-count"></span>
+      </div>
+      <h2 class="question-title"></h2>
+      <p class="question-description"></p>
+      <form class="answer-form">
+        <label class="answer-label">คำตอบของคุณ</label>
+        <textarea name="answer" rows="3" maxlength="1000" required placeholder="พิมพ์คำตอบที่นี่..."></textarea>
+        <label class="name-label" for="display-name">ชื่อเล่น <span aria-hidden="true">*</span></label>
+        <input id="display-name" name="display_name" maxlength="40" required autocomplete="nickname" placeholder="กรอกชื่อเล่นก่อนส่งคำตอบ">
+        <button class="submit-button" type="submit">ส่งคำตอบ <span aria-hidden="true">→</span></button>
+        <p class="form-message" aria-live="polite"></p>
+      </form>
+      <div class="answers-heading">
+        <h3>คำตอบจากทุกคน</h3>
+        <span class="answer-total"></span>
+      </div>
+      <div class="answers-list"></div>
+    </article>
+  </template>
+</body>
+</html>
